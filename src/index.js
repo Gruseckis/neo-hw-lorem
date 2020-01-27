@@ -1,8 +1,10 @@
-const component = text => {
-  console.log(text);
-  const element = document.createElement('div');
-  element.innerHTML = `<h1> ${text} </h1>`;
-  return element;
-};
+import { createComponent } from './utils/createComponent';
+import Dialog from './dialog';
 
-document.body.appendChild(component('Hello world'));
+let button = createComponent('button', 'open', 'button');
+const dialog = new Dialog();
+
+document.body.appendChild(button);
+button.addEventListener('click', () => {
+  !dialog.opened ? dialog.open() : dialog.close();
+});

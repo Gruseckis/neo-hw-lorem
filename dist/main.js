@@ -86,14 +86,51 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/dialog/index.js":
+/*!*****************************!*\
+  !*** ./src/dialog/index.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ \"./src/utils/index.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Dialog =\n/*#__PURE__*/\nfunction () {\n  function Dialog() {\n    _classCallCheck(this, Dialog);\n\n    this._createDialog();\n  }\n\n  _createClass(Dialog, [{\n    key: \"_createDialog\",\n    value: function _createDialog() {\n      var _this = this;\n\n      this.overlay = Object(_utils__WEBPACK_IMPORTED_MODULE_0__[\"createComponent\"])('div', 'overlay', 'dialog-overlay');\n      this.dialogWindow = Object(_utils__WEBPACK_IMPORTED_MODULE_0__[\"createComponent\"])('div', 'inner content', 'dialog-popup');\n      this.overlay.appendChild(this.dialogWindow);\n      this.overlay.addEventListener('click', function () {\n        _this.close();\n      });\n      this.dialogWindow.addEventListener('click', function (event) {\n        event.stopPropagation();\n      });\n    }\n  }, {\n    key: \"open\",\n    value: function open() {\n      this.opened = true;\n      document.body.appendChild(this.overlay);\n    }\n  }, {\n    key: \"close\",\n    value: function close() {\n      this.opened = false;\n      document.body.removeChild(this.overlay);\n    }\n  }]);\n\n  return Dialog;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Dialog);\n\n//# sourceURL=webpack:///./src/dialog/index.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var component = function component(text) {\n  console.log(text);\n  var element = document.createElement('div');\n  element.innerHTML = \"<h1> \".concat(text, \" </h1>\");\n  return element;\n};\n\ndocument.body.appendChild(component('Hello world'));\n\n//# sourceURL=webpack:///./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_createComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/createComponent */ \"./src/utils/createComponent.js\");\n/* harmony import */ var _dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dialog */ \"./src/dialog/index.js\");\n\n\nvar button = Object(_utils_createComponent__WEBPACK_IMPORTED_MODULE_0__[\"createComponent\"])('button', 'open', 'button');\nvar dialog = new _dialog__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\ndocument.body.appendChild(button);\nbutton.addEventListener('click', function () {\n  !dialog.opened ? dialog.open() : dialog.close();\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/utils/createComponent.js":
+/*!**************************************!*\
+  !*** ./src/utils/createComponent.js ***!
+  \**************************************/
+/*! exports provided: createComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"createComponent\", function() { return createComponent; });\nvar createComponent = function createComponent(type, innerText, classNames) {\n  var element = document.createElement(type);\n  element.classList = classNames;\n  element.innerText = innerText;\n  return element;\n};\n\n//# sourceURL=webpack:///./src/utils/createComponent.js?");
+
+/***/ }),
+
+/***/ "./src/utils/index.js":
+/*!****************************!*\
+  !*** ./src/utils/index.js ***!
+  \****************************/
+/*! exports provided: createComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _createComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createComponent */ \"./src/utils/createComponent.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"createComponent\", function() { return _createComponent__WEBPACK_IMPORTED_MODULE_0__[\"createComponent\"]; });\n\n\n\n//# sourceURL=webpack:///./src/utils/index.js?");
 
 /***/ })
 

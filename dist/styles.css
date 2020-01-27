@@ -1,0 +1,25 @@
+body {
+  background-color: pink;
+}
+
+.dialog-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  overflow-y: auto;
+}
+
+.dialog-popup {
+  margin: 20px auto;
+  display: inline-block;
+  background: #fff;
+  border-radius: 3px;
+  padding: 30px;
+  text-align: left;
+}
