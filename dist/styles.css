@@ -1,10 +1,11 @@
-body {
+/* body {
   background-color: pink;
-}
+} */
 
 .dialog-overlay {
+  display: flex;
   background-color: rgba(0, 0, 0, 0.5);
-  display: block;
+  /* display: block; */
   position: fixed;
   z-index: 100;
   top: 0px;
@@ -16,12 +17,13 @@ body {
 }
 
 .dialog-popup {
-  margin: 20px auto;
+  margin: auto;
   display: inline-block;
   background: #fff;
   border-radius: 3px;
   padding: 30px;
   text-align: left;
+  width: 70%;
 }
 
 /* Table styles */
@@ -29,7 +31,26 @@ body {
   margin: auto;
 }
 
+.table-body-row:hover {
+  cursor: pointer;
+}
+
 .table-column-avatar {
   max-width: 50px;
   max-height: 50px;
+}
+
+/* Dialog inputs */
+.dialog-close-cross {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.input-wrapper {
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.input-wrapper label {
+  display: block;
 }
