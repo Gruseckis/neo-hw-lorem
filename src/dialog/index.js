@@ -4,6 +4,14 @@ import { baseUrl } from '../index';
 import axios from 'axios';
 import uuid from 'uuid';
 
+export const emptyForm = {
+  title: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  balance: ''
+}
+
 class Dialog {
   constructor() {
     this._createDialog();
@@ -26,23 +34,26 @@ class Dialog {
   }
 
   async open(recordGuid) {
-    console.log(this.table);
     this.opened = true;
-    this.userGuid = recordGuid;
+    this.userGuid = recordGuid === 'new' ? undefined: recordGuid;
     this.dialogButtons = this.dialogControls();
     document.body.appendChild(this.overlay);
     const button = document.getElementsByClassName('dialog-delete-button')[0];
-    if(recordGuid){
+    if(recordGuid && recordGuid !== 'new'){
       const result  = await axios.get(`${baseUrl}/${recordGuid}`);
       this.userForm.setInitialValues(result.data);
       button.style.display = 'inline';
     } else {
+      this.userForm.setInitialValues(emptyForm)
       button.style.display = 'none';
     }
   }
-  close() {
+  close(leaveHistory) {
+    if(!leaveHistory){
+      window.history.pushState({},'Mega Lorem Ipsum', window.location.href.substr(0, window.location.href.lastIndexOf('?')))
+    }
     this.opened = false;
-    document.body.removeChild(this.overlay);
+    this._fadeoutDialog(this.overlay, 400);
   }
 
   inputContainer(data) {
@@ -58,6 +69,7 @@ class Dialog {
     const container = document.createElement('div');
     container.classList = 'dialog-close-cross';
     const closeButton = document.createElement('button');
+    closeButton.className = 'button'
     closeButton.innerText = 'X';
     closeButton.addEventListener('click', () => {
       this.close();
@@ -72,7 +84,7 @@ class Dialog {
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
-    deleteButton.classList = 'dialog-delete-button'; 
+    deleteButton.classList = 'dialog-delete-button button-warning button'; 
     deleteButton.addEventListener('click', () => {
       this._deleteUser();
     });
@@ -80,7 +92,7 @@ class Dialog {
 
     const saveButton = document.createElement('button');
     saveButton.textContent = 'Save';
-    saveButton.classList = 'dialog-save-button';
+    saveButton.classList = 'dialog-save-button button-primary button';
     saveButton.addEventListener('click', () => {
       this._createUpdateUser();
     })
@@ -96,13 +108,14 @@ class Dialog {
   }
 
   async _createUpdateUser() {
-    console.log(this.userForm.getInputValues())
     const inputValues = this.userForm.getInputValues()
+    console.log(inputValues);
     if(this.userGuid){
       await axios.put(`${baseUrl}/${this.userGuid}`, inputValues);
       this._updateDom()
     } else {
       inputValues.id = uuid.v4();
+      history.replaceState({id: inputValues.id}, `${inputValues.firstName} ${inputValues.lastName}`, `?id=${inputValues.id}`)
       await axios.post(`${baseUrl}`, inputValues);
       this._addRecordToTable(inputValues);
     }
@@ -126,6 +139,7 @@ class Dialog {
     Object.keys(rowData).forEach(key => {
       if(key === 'id') {
         bodyRow.addEventListener('click', () => {
+          window.history.pushState({id: rowData[key]}, `${rowData.firstName} ${rowData.lastName}`, `?id=${rowData.id}`);
           this.open(rowData[key]);
         })
       } else {
@@ -134,6 +148,17 @@ class Dialog {
     });
     table.appendChild(bodyRow);
   }
+
+  _fadeoutDialog(dialog, speed) {
+    var seconds = speed/1000;
+    dialog.style.transition = "opacity "+seconds+"s ease";
+
+    dialog.style.opacity = 0;
+    setTimeout(function() {
+        document.body.removeChild(dialog);
+        dialog.style.opacity = 1;
+    }, speed);
+}
 }
 
 export default Dialog;

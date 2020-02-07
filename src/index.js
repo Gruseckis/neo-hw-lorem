@@ -15,15 +15,30 @@ const tableColumnNames = [
 ]
 
 const main = async() => {
+  const openDialogWithUrl = () => {
+    let urlId = window.location.search.slice(4);
+    if(urlId){
+      urlId === 'new' ? dialog.open('new') : dialog.open(urlId);
+    } else if (dialog.opened) {
+      dialog.close(true);
+    }
+  }
   const result = await axios.get(baseUrl);
   const userTable = new Table(result.data, tableColumnNames);
-  const newUserButton = createComponent('button', 'Add new user', 'add-new-button')
+  const buttonContainer = createComponent('div', '', 'add-new-container');
+  const newUserButton = createComponent('button', 'Add new user', 'add-new-button button-primary button');
   const dialog = new Dialog(userTable);
   newUserButton.addEventListener('click', () => {
-    dialog.open();
+    window.history.pushState({id: 'new'}, `Create new user`, `?id=new`);
+    dialog.open('new');
   })
-  document.body.appendChild(newUserButton)
+  buttonContainer.appendChild(newUserButton);
+  document.body.appendChild(buttonContainer)
   document.body.appendChild(userTable.table);
+  openDialogWithUrl()
+  window.onpopstate = function (event) {
+    openDialogWithUrl()
+  }
 }
 
  main();

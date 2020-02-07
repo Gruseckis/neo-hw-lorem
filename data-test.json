@@ -57,12 +57,12 @@
       "balance": 55284.51
     },
     {
-      "id": "cc5267ea-925d-42e9-864b-c47a4f9872ca",
       "title": "Honorable",
       "firstName": "Ashley",
       "lastName": "Lubbock",
       "email": "alubbock7@answers.com",
-      "balance": 93626.28
+      "balance": "93626.28",
+      "id": "cc5267ea-925d-42e9-864b-c47a4f9872ca"
     },
     {
       "title": "Mr",
@@ -87,6 +87,22 @@
       "email": "email@email.com",
       "balance": "40003.01",
       "id": "6afae7ab-9019-4876-8637-04ea5ba606d6"
+    },
+    {
+      "title": "test1",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test",
+      "balance": "test",
+      "id": "27d2a86d-7031-46c4-ab0d-b987ebf2ad8d"
+    },
+    {
+      "title": "Mr",
+      "firstName": "Germans",
+      "lastName": "Gruseckis",
+      "email": "easd@asda.ld",
+      "balance": "100000",
+      "id": "5b94f4d5-a24a-47ad-9910-b7315d5ed033"
     }
   ]
 }

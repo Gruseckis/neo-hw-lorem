@@ -2,7 +2,7 @@ export class UserForm {
   constructor() {
     this.container = document.createElement('div');
     this.container.classList = 'input-container';
-    this.title = this._createInput('title','title');
+    this.title = this._createInput('title','title',);
     this.firstName = this._createInput('first-name', 'firstName');
     this.lastName = this._createInput('last-name', 'lastName');
     this.email = this._createInput('email', 'email');
@@ -35,7 +35,7 @@ export class UserForm {
     return [this.title , this.firstName, this.lastName, this.email, this.balance];
   }
 
-  _createInput(className, inputName, type) {
+  _createInput(className, inputName, errorMessage, type) {
     const wrapper = document.createElement('div');
     wrapper.classList = 'input-wrapper';
     const label = document.createElement('label');
@@ -46,8 +46,12 @@ export class UserForm {
     input.classList = `input-${className}`;
     input.name = inputName;
     input.type = type ? type : 'text';
+    const error = document.createElement('p');
+    error.classList = `error-${className}`;
+    error.textContent = errorMessage ? errorMessage : 'This field is required';
     wrapper.appendChild(label);
     wrapper.appendChild(input);
+    wrapper.appendChild(error);
     const fieldInput = {
       wrapper,
       input,

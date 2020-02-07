@@ -39,6 +39,7 @@ const tableBody = (data, dialogRef) => {
     Object.keys(row).forEach(key => {
       if(key === 'id') {
         bodyRow.addEventListener('click', () => {
+          window.history.pushState({id: row[key]}, `${row.firstName} ${row.lastName}`, `?id=${row.id}`);
           dialogRef.open(row[key]);
         })
       } else {
@@ -48,20 +49,4 @@ const tableBody = (data, dialogRef) => {
     body.appendChild(bodyRow);
   });
   return body;
-}
-
-export const createTableRow = (row) => {
-  const bodyRow = document.createElement('tr');
-  bodyRow.classList = 'table-body-row';
-  bodyRow.id = row.id;
-  Object.keys(row).forEach(key => {
-    if(key === 'id') {
-      bodyRow.addEventListener('click', () => {
-        dialogRef.open(row[key]);
-      })
-    } else {
-      bodyRow.appendChild(createComponent('td', row[key], `${key}`))
-    }
-  });
-  return bodyRow
 }

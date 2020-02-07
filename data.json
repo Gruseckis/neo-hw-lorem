@@ -1,5 +1,6 @@
 {
-  "users": [{"id":"f48f6112-cdf5-4fc2-a4b5-6c7f1987530e","title":"Rev","firstName":"Lionel","lastName":"Wapplington","email":"lwapplington0@blinklist.com","balance":82902.99},
+  "users": [
+    {"id":"f48f6112-cdf5-4fc2-a4b5-6c7f1987530e","title":"Rev","firstName":"Lionel","lastName":"Wapplington","email":"lwapplington0@blinklist.com","balance":82902.99},
     {"id":"38d1d6cc-bf0a-45c4-bfa8-47dccc0c3821","title":"Mr","firstName":"Elyse","lastName":"McCloughen","email":"emccloughen1@fc2.com","balance":28722.05},
     {"id":"3ca3e36a-9f5b-401c-b6f9-589eae7041a9","title":"Dr","firstName":"Heloise","lastName":"Stolz","email":"hstolz2@google.com.br","balance":19920.35},
     {"id":"e0880ebc-4d02-4dab-bc3f-9d511d3c5de1","title":"Honorable","firstName":"Graeme","lastName":"Essame","email":"gessame3@usnews.com","balance":39846.78},
