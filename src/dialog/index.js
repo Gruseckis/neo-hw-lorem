@@ -25,10 +25,10 @@ class Dialog {
     this.dialogWindow.appendChild(this.userForm.getInputContainer());
     this.dialogWindow.appendChild(this.dialogControls());
     this.overlay.appendChild(this.dialogWindow);
-    this.overlay.addEventListener('click', () => {
+    this.overlay.addEventListener('mousedown', () => {
       this.close();
     });
-    this.dialogWindow.addEventListener('click', event => {
+    this.dialogWindow.addEventListener('mousedown', event => {
       event.stopPropagation();
     });
   }
@@ -108,18 +108,22 @@ class Dialog {
   }
 
   async _createUpdateUser() {
-    const inputValues = this.userForm.getInputValues()
-    console.log(inputValues);
-    if(this.userGuid){
-      await axios.put(`${baseUrl}/${this.userGuid}`, inputValues);
-      this._updateDom()
+    const inputValues = this.userForm.getInputValues();
+    const formErrors = this.userForm.checkFormForErrors(inputValues);
+    if(!formErrors.length){
+      if(this.userGuid){
+        await axios.put(`${baseUrl}/${this.userGuid}`, inputValues);
+        this._updateDom()
+      } else {
+        inputValues.id = uuid.v4();
+        history.replaceState({id: inputValues.id}, `${inputValues.firstName} ${inputValues.lastName}`, `?id=${inputValues.id}`)
+        await axios.post(`${baseUrl}`, inputValues);
+        this._addRecordToTable(inputValues);
+      }
+      this.close();
     } else {
-      inputValues.id = uuid.v4();
-      history.replaceState({id: inputValues.id}, `${inputValues.firstName} ${inputValues.lastName}`, `?id=${inputValues.id}`)
-      await axios.post(`${baseUrl}`, inputValues);
-      this._addRecordToTable(inputValues);
+      this.userForm.showErrors(formErrors)
     }
-    this.close();
   }
 
   async _updateDom() {
@@ -151,14 +155,15 @@ class Dialog {
 
   _fadeoutDialog(dialog, speed) {
     var seconds = speed/1000;
-    dialog.style.transition = "opacity "+seconds+"s ease";
+    dialog.style.transition = `opacity ${seconds} ease`;
 
     dialog.style.opacity = 0;
-    setTimeout(function() {
-        document.body.removeChild(dialog);
-        dialog.style.opacity = 1;
+    setTimeout(() => {
+      document.body.removeChild(dialog);
+      dialog.style.opacity = 1;
+      this.userForm.showErrors([]);
     }, speed);
-}
+  }
 }
 
 export default Dialog;

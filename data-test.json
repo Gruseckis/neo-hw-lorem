@@ -9,12 +9,12 @@
       "balance": 82902.99
     },
     {
-      "id": "38d1d6cc-bf0a-45c4-bfa8-47dccc0c3821",
       "title": "Mr",
-      "firstName": "Elyse",
+      "firstName": "Elysee",
       "lastName": "McCloughen",
       "email": "emccloughen1@fc2.com",
-      "balance": 28722.05
+      "balance": "28722.05",
+      "id": "38d1d6cc-bf0a-45c4-bfa8-47dccc0c3821"
     },
     {
       "id": "3ca3e36a-9f5b-401c-b6f9-589eae7041a9",
@@ -82,27 +82,19 @@
     },
     {
       "title": "Mr",
-      "firstName": "Name",
-      "lastName": "Surname",
-      "email": "email@email.com",
-      "balance": "40003.01",
-      "id": "6afae7ab-9019-4876-8637-04ea5ba606d6"
-    },
-    {
-      "title": "test1",
-      "firstName": "test",
-      "lastName": "test",
-      "email": "test",
-      "balance": "test",
-      "id": "27d2a86d-7031-46c4-ab0d-b987ebf2ad8d"
-    },
-    {
-      "title": "Mr",
       "firstName": "Germans",
       "lastName": "Gruseckis",
       "email": "easd@asda.ld",
       "balance": "100000",
       "id": "5b94f4d5-a24a-47ad-9910-b7315d5ed033"
+    },
+    {
+      "title": "Mr",
+      "firstName": "Mio",
+      "lastName": "Mao",
+      "email": "asd@as.lv",
+      "balance": "1234",
+      "id": "64591e01-6ef0-453e-b3bc-7b50d9b151d3"
     }
   ]
 }

@@ -1,12 +1,15 @@
+import validator from 'validator';
+
 export class UserForm {
   constructor() {
     this.container = document.createElement('div');
     this.container.classList = 'input-container';
+    this.errors = {}
     this.title = this._createInput('title','title',);
     this.firstName = this._createInput('first-name', 'firstName');
     this.lastName = this._createInput('last-name', 'lastName');
-    this.email = this._createInput('email', 'email');
-    this.balance = this._createInput('balance', 'balance');
+    this.email = this._createInput('email', 'email', 'Please enter valid email');
+    this.balance = this._createInput('balance', 'balance', 'Please enter valid ballance');
   }
 
   setInitialValues(data) {
@@ -31,6 +34,34 @@ export class UserForm {
     },{})
   }
 
+  checkFormForErrors(inputValues) {
+    let formErrors = []
+    const validators = {
+      title: (value) =>  value ? validator.isAlpha(value) : false,
+      firstName: (value) => value ? validator.isAlpha(value) : false,
+      lastName: (value) => value ? validator.isAlpha(value) : false,
+      email: (value) =>  value ? validator.isEmail(value) : false,
+      balance: (value) => value ? validator.isNumeric(value) : false,
+    }
+    Object.keys(inputValues).forEach(key => {
+      if(!validators[key](inputValues[key])) {
+        formErrors.push(key);
+      }
+    })
+    return formErrors;
+  }
+
+  showErrors(errorList) {
+    Object.keys(this.errors).forEach(key => {
+      const match = errorList.find(item => item === key);
+      if(match) {
+        this.errors[key].style.display = 'block';
+      }else {
+        this.errors[key].style.display = 'none';
+      }
+    })
+  }
+
   _getInputNodes() {
     return [this.title , this.firstName, this.lastName, this.email, this.balance];
   }
@@ -49,6 +80,8 @@ export class UserForm {
     const error = document.createElement('p');
     error.classList = `error-${className}`;
     error.textContent = errorMessage ? errorMessage : 'This field is required';
+    error.style.display = 'none';
+    this.errors[inputName] = error;
     wrapper.appendChild(label);
     wrapper.appendChild(input);
     wrapper.appendChild(error);
