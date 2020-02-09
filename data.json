@@ -1,12 +1,12 @@
 {
   "users": [
     {
-      "id": "f48f6112-cdf5-4fc2-a4b5-6c7f1987530e",
       "title": "Rev",
-      "firstName": "Lionel",
+      "firstName": "Lionels",
       "lastName": "Wapplington",
       "email": "lwapplington0@blinklist.com",
-      "balance": 82902.99
+      "balance": "82902.99",
+      "id": "f48f6112-cdf5-4fc2-a4b5-6c7f1987530e"
     },
     {
       "id": "38d1d6cc-bf0a-45c4-bfa8-47dccc0c3821",
@@ -17,12 +17,12 @@
       "balance": 28722.05
     },
     {
-      "id": "3ca3e36a-9f5b-401c-b6f9-589eae7041a9",
       "title": "Dr",
       "firstName": "Heloise",
       "lastName": "Stolz",
       "email": "hstolz2@google.com.br",
-      "balance": 19920.35
+      "balance": "19920.35",
+      "id": "3ca3e36a-9f5b-401c-b6f9-589eae7041a9"
     },
     {
       "title": "Dr",
